@@ -1,0 +1,8 @@
+services:
+  quasar:
+    build:
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - 6060:6060
+      - 8080:8080
