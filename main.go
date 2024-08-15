@@ -1,23 +1,20 @@
 package main
 
 import (
-	"log/slog"
+	"context"
 	"net/http"
-	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/blackskad/quasar/pkg/o11y"
 	"github.com/blackskad/quasar/pkg/web"
 )
 
 func main() {
-	go func() {
-		err := http.ListenAndServe(":6060", nil)
-		if err != nil {
-			slog.Warn("pprof http server shut down", slog.Any("error", err))
-		}
-	}()
+	ctx := context.Background()
+
+	o11y.StartPProfServer()
 
 	sigc := make(chan os.Signal, 1)
 	signal.Notify(sigc,
@@ -31,7 +28,7 @@ func main() {
 
 	server := &http.Server{
 		Addr:    ":8080",
-		Handler: mux,
+		Handler: o11y.Register(ctx, mux),
 	}
 
 	done := make(chan struct{})
