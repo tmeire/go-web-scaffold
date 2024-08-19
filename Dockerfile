@@ -2,6 +2,10 @@
 # try to keep the debian version in sync with the distroless version
 FROM golang:1.23-bookworm as base
 
+ARG VERSION=development
+
+WORKDIR /work
+
 COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
@@ -18,12 +22,12 @@ RUN go test -v
 # Stage to build the binary
 FROM base as build
 
-RUN CGO_ENABLED=0 go build -o /go/bin/app .
+RUN CGO_ENABLED=0 go build -ldflags="-X 'github.com/blackskad/go-web-scaffold/environment.Version=${VERSION}'" -o app .
 
 # Stage with the production binary
 FROM gcr.io/distroless/static-debian12 as production
 
-COPY --from=build /go/bin/app /
+COPY --from=build /work/app /
 
 # port for pprof
 EXPOSE 6060
