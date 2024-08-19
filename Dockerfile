@@ -2,8 +2,6 @@
 # try to keep the debian version in sync with the distroless version
 FROM golang:1.23-bookworm as base
 
-WORKDIR /go/src/app
-
 COPY go.mod ./
 COPY go.sum ./
 RUN go mod download

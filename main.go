@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/blackskad/quasar/pkg/o11y"
-	"github.com/blackskad/quasar/pkg/web"
+	"github.com/blackskad/go-web-scaffold/pkg/o11y"
+	"github.com/blackskad/go-web-scaffold/pkg/web"
 )
 
 func main() {
