@@ -1,3 +1,4 @@
 package environment
 
-const Name = "quasar"
+const Name = "go-web-scaffold"
+const Version = "development"

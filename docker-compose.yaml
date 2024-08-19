@@ -1,5 +1,5 @@
 services:
-  quasar:
+  go-web-scaffold:
     build:
       dockerfile: Dockerfile
       target: production

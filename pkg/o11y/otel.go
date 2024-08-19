@@ -31,6 +31,7 @@ func initTracer(ctx context.Context) (*sdktrace.TracerProvider, error) {
 			resource.NewWithAttributes(
 				semconv.SchemaURL,
 				semconv.ServiceName(environment.Name),
+				semconv.ServiceVersion(environment.Version),
 			),
 		),
 	}
