@@ -1,0 +1,25 @@
+name: build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Running tests
+        uses: docker/build-push-action@v6
+        with:
+          push: false
+          target: test
+
+      - name: Build production image
+        uses: docker/build-push-action@v6
+        with:
+          push: false
+          target: production
