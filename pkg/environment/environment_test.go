@@ -15,13 +15,6 @@ func TestConfig(t *testing.T) {
 	// Make sure the env var is not accidentially set somewhere else
 	os.Unsetenv(envVarName)
 
-	// Just a small test for the vetting step in the build process
-	var m map[string]string
-	if false {
-		m[envVarName] = "foo"
-		2
-	}
-
 	tests := []struct {
 		name    string
 		value   string

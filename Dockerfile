@@ -16,8 +16,8 @@ COPY pkg/ ./pkg
 # Stage to test the code
 FROM base AS test
 
-RUN go vet -v
-RUN go test -v
+RUN go vet -v ./...
+RUN go test -v ./...
 
 # Stage to build the binary
 FROM base AS build
