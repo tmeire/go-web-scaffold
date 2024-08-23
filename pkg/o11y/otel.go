@@ -23,7 +23,7 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.26.0"
 )
 
-func initTracer(ctx context.Context) (*sdktrace.TracerProvider, error) {
+func initTracer(ctx context.Context, conf environment.Config) (*sdktrace.TracerProvider, error) {
 	opts := []sdktrace.TracerProviderOption{
 		// TODO: add ability to switch between sdktrace.AlwaysSample and sdktrace.ProbabilitySampler for production.
 		sdktrace.WithSampler(sdktrace.AlwaysSample()),
@@ -37,11 +37,13 @@ func initTracer(ctx context.Context) (*sdktrace.TracerProvider, error) {
 	}
 
 	// Always export to stdout
-	expStdout, err := stdouttrace.New()
-	if err != nil {
-		return nil, err
+	if conf.EnableTracesStdout {
+		expStdout, err := stdouttrace.New()
+		if err != nil {
+			return nil, err
+		}
+		opts = append(opts, sdktrace.WithBatcher(expStdout))
 	}
-	opts = append(opts, sdktrace.WithBatcher(expStdout))
 
 	// If the env var is set, also export to an otel collector
 	if os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT") != "" {
@@ -56,7 +58,7 @@ func initTracer(ctx context.Context) (*sdktrace.TracerProvider, error) {
 	tp := sdktrace.NewTracerProvider(opts...)
 	otel.SetTracerProvider(tp)
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
-	return tp, err
+	return tp, nil
 }
 
 func initMeter() (*sdkmetric.MeterProvider, error) {
@@ -96,9 +98,9 @@ func runPrometheusServer() {
 
 var initOnce sync.Once
 
-func Register(ctx context.Context, h http.Handler) http.Handler {
+func Register(ctx context.Context, conf environment.Config, h http.Handler) http.Handler {
 	initOnce.Do(func() {
-		_, err := initTracer(ctx)
+		_, err := initTracer(ctx, conf)
 		if err != nil {
 			log.Fatal(err)
 		}

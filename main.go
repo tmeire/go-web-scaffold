@@ -7,12 +7,15 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/blackskad/go-web-scaffold/pkg/environment"
 	"github.com/blackskad/go-web-scaffold/pkg/o11y"
 	"github.com/blackskad/go-web-scaffold/pkg/web"
 )
 
 func main() {
 	ctx := context.Background()
+
+	conf := environment.Parse()
 
 	o11y.StartPProfServer()
 
@@ -28,7 +31,7 @@ func main() {
 
 	server := &http.Server{
 		Addr:    ":8080",
-		Handler: o11y.Register(ctx, mux),
+		Handler: o11y.Register(ctx, conf, mux),
 	}
 
 	done := make(chan struct{})
