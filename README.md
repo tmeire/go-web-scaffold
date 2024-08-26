@@ -22,13 +22,25 @@ While the app can be build and run with plain Go commands, it's intended to be b
 
 To allow you to easily run the service locally without much local config, a docker-compose.yaml file is included. This file will include everything to run a minimal stack.
 
-### CI pipeline - GitHub only
+### GitHub CI pipeline
 
-The project contains a GitHub Actions configuration file to run the docker build stages on `push` and `pull_requests`. It will first run the `test` stage, then it run the `production` stage.
+The project contains a GitHub Actions configuration file to run the docker build stages on `push` to any branch and semver tags, and on `pull_requests` against the `main` branch. It will first run the `test` stage, then it run the `production` stage.
 
-While it will build the production image, the workflow is not configured to push the image to a docker image registry. You will have to uncomment the docker login job, change the `push` argument for the production job to `true`, and set a proper image tag.
+When the pipeline runs for a semver tag, the tag will be embedded in the binary as the application version and the image will be pushed to ghcr. None of the other runs will push a docker image.
+
+While it is recommended to follow [trunk-based development](https://trunkbaseddevelopment.com/), it is not enforced by the build system in any way.
 
 In your GitHub repository, there is an option to configure rulesets for your main branch. Within the ruleset, the success of the build workflow can be made required for each pull requests. For more information, please see the [GitHub documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets#require-status-checks-to-pass-before-merging).
+
+
+### Versioning
+
+The CI pipeline is set up to manage  with a semantic versioning scheme.
+
+* The `main` branch, or trunk is where all the development happens for the next release.
+* When a new release should be made, create a new branch `release-${MAJOR}.${MINOR}` and push it to GitHub. Once pushed, a new tag `v${MAJOR}.${MINOR}.0-rc.0` will automatically be created. Once tagged, a new build will kick off for that tag that publishes a docker image with the same tag.
+* Every time a new release is made, push a new, empty commit with an incremented tag to the release branch. Every semver tag will kick off
+
 
 ### App configuration
 
@@ -37,7 +49,6 @@ The main configuration will be done through environment variables. The environme
 ### Profiling
 
 The service always runs with pprof enabled on port 6060. This allows you to fetch runtime profiling information on `http://localhost:6060/debug/pprof`
-
 
 ### Observability
 
