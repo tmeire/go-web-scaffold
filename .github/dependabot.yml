@@ -9,6 +9,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      otel-dependencies:
+        patterns:
+          - "go.opentelemetry.io/*"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
