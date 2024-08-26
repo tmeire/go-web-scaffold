@@ -43,11 +43,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Build production image
-      #   uses: docker/build-push-action@v6
-      #   with:
-      #     target: production
-      #     push: ${{ env.GITHUB_REF_TYPE == "tag" }}
-      #     build-args: |
-      #       VERSION=${{ env.VERSION }}
-      #     tags: ghcr.io/blackskad/go-web-scaffold:${{ env.VERSION }}
+      - name: Build production image
+        uses: docker/build-push-action@v6
+        with:
+          target: production
+          push: true #${{ env.GITHUB_REF_TYPE == "tag" }}
+          build-args: |
+            VERSION=${{ env.VERSION }}
+          tags: ghcr.io/blackskad/go-web-scaffold:${{ env.VERSION }}
