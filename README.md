@@ -32,16 +32,6 @@ While it is recommended to follow [trunk-based development](https://trunkbasedde
 
 In your GitHub repository, there is an option to configure rulesets for your main branch. Within the ruleset, the success of the build workflow can be made required for each pull requests. For more information, please see the [GitHub documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets#require-status-checks-to-pass-before-merging).
 
-
-### Versioning
-
-The CI pipeline is set up to manage  with a semantic versioning scheme.
-
-* The `main` branch, or trunk is where all the development happens for the next release.
-* When a new release should be made, create a new branch `release-${MAJOR}.${MINOR}` and push it to GitHub. Once pushed, a new tag `v${MAJOR}.${MINOR}.0-rc.0` will automatically be created. Once tagged, a new build will kick off for that tag that publishes a docker image with the same tag.
-* Every time a new release is made, push a new, empty commit with an incremented tag to the release branch. Every semver tag will kick off
-
-
 ### App configuration
 
 The main configuration will be done through environment variables. The environment package will parse the environment variables into a struct that can then be passed around through the service.
