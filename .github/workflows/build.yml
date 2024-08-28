@@ -38,6 +38,7 @@ jobs:
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
+        if: github.ref_type == 'tag'
         with:
           registry: ghcr.io
           username: ${{ github.actor }}

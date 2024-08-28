@@ -1,4 +1,8 @@
-# Go Web Template
+# Go Web Scaffold
+
+This Go Web Scaffold is a ready-to-go project that will get you going with your Go web application straight out of the door, with all the nuts and bolt that you expect in your projects: a decent project layout, tablestakes app plumbing, a local development setup, a proper CI pipeline with artifact publishing, and more...
+
+The core philosophies of this scaffold are __simplicity__ and __efficiency__. The scaffold should be self-explanatory and easy to use for anyone who's seen a Go project before. You shouldn't need to search within the codebase for a piece of functionality. You shouldn't need to learn extra tools besides Go to get started. You shouldn't have to jump though a ton of configuration to get going. The scaffold should also not be doing anything that causes useless overhead, neither in the build process nor in the actual application. It shouldn't publish build artifacts that noone ever looks at. It shouldn't use CPU or memory hungry libraries by default.
 
 ## Getting started
 
@@ -10,7 +14,7 @@ How to get started with the scaffolding:
 	gonew github.com/blackskad/go-web-scaffold github.com/$ACCOUNT/$PROJECTNAME
 	```
 
-1. Replace all mentions of go-web-scaffold with your own project name. At the moment, that's in the Dockerfile and in the GitHub build workflow.
+1. Replace all mentions of go-web-scaffold with your own project name. At the moment, that's in the [Dockerfile](https://github.com/blackskad/go-web-scaffold/blob/main/Dockerfile#L25) and in the GitHub [build workflow](https://github.com/blackskad/go-web-scaffold/blob/main/.github/workflows/build.yml#L53).
 	```
 	sed -i 's/blackskad\/go-web-scaffold/$ACCOUNT\/$PROJECTNAME/g' .
 	```
@@ -42,7 +46,9 @@ While the app can be build and run with plain Go commands, it's intended to be b
 
 ### Docker compose
 
-To allow you to easily run the service locally without much local config, a docker-compose.yaml file is included. This file will include everything to run a minimal stack.
+To allow you to easily run the service locally without having to install a lot of local dependencies, a docker-compose.yaml file is included. This file includes everything to run a minimal stack.
+
+Run `docker compose up --build` to make the service accessible [locally on port 8080](http://localhost:8080)
 
 ### GitHub CI pipeline
 
