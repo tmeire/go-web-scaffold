@@ -1,5 +1,27 @@
 # Go Web Template
 
+## Getting started
+
+How to get started with the scaffolding:
+
+1. Clone this repository
+	```
+	go install golang.org/x/tools/cmd/gonew@latest
+	gonew github.com/blackskad/go-web-scaffold github.com/$ACCOUNT/$PROJECTNAME
+	```
+
+1. Replace all mentions of go-web-scaffold with your own project name. At the moment, that's in the Dockerfile and in the GitHub build workflow.
+	```
+	sed -i 's/blackskad\/go-web-scaffold/$ACCOUNT\/$PROJECTNAME/g' .
+	```
+
+1. Initialize the git repo and push them to your own GitHub repo.
+	```
+	git init
+	git remote add origin git@github.com:$ACCOUNT/$PROJECTNAME
+	git push origin main
+	```
+
 ## What's included
 
 ### Basic setup
