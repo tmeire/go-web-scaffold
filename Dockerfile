@@ -17,7 +17,13 @@ COPY pkg/ ./pkg
 FROM base AS test
 
 RUN go vet -v ./...
-RUN go test -v ./...
+RUN go test -race -v -coverprofile=cover.out -covermode=atomic ./...
+RUN go tool cover -html cover.out -o cover.html
+
+FROM scratch AS coverage
+
+COPY --from=test /work/cover.html coverage.html
+COPY --from=test /work/cover.out  coverage.out
 
 # Stage to build the binary
 FROM base AS build
