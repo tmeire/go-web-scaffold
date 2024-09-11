@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Application build information</title>
+        <style>
+            dt {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Application build information</h1>
+        <h2>Base info</h2>
+        <dl>
+            <dt>Go version</dt>
+            <dd>{{ .GoVersion }}</dd>
+        </dl>
+        <h2>Module</h2> 
+        <dl>
+            <dt>Path</dt>
+            <dd>{{ .Main.Path }}</dd>
+            <dt>Version</dt>
+            <dd>{{ .Main.Version }}</dd>
+            <dt>Sum</dt>
+            <dd>{{ .Main.Sum }}</dd>
+        </dl>
+        <h2>Settings</h2>
+        <dl>
+        {{ range .Settings }}
+            <dt>{{ .Key }}</dt>
+            <dd>{{ .Value }}</dd>
+        {{ end }}
+        </dl>
+        <h2>Modules</h2>
+        <ul>
+        {{ range .Deps }}
+            <li>{{ .Path }} {{ .Version }}</li>
+        {{ end }}
+    </body>
+</html>
