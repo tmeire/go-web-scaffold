@@ -6,7 +6,6 @@ ARG VERSION=development
 
 WORKDIR /work
 
-COPY .git .git
 COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
