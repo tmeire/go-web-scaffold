@@ -11,12 +11,12 @@ How to get started with the scaffolding:
 1. Clone this repository
 	```
 	go install golang.org/x/tools/cmd/gonew@latest
-	gonew github.com/blackskad/go-web-scaffold github.com/$ACCOUNT/$PROJECTNAME
+	gonew github.com/tmeire/go-web-scaffold github.com/$ACCOUNT/$PROJECTNAME
 	```
 
-1. Replace all mentions of go-web-scaffold with your own project name. At the moment, that's in the [Dockerfile](https://github.com/blackskad/go-web-scaffold/blob/main/Dockerfile#L25) and in the GitHub [build workflow](https://github.com/blackskad/go-web-scaffold/blob/main/.github/workflows/build.yml#L53).
+1. Replace all mentions of go-web-scaffold with your own project name. At the moment, that's in the [Dockerfile](https://github.com/tmeire/go-web-scaffold/blob/main/Dockerfile#L25) and in the GitHub [build workflow](https://github.com/tmeire/go-web-scaffold/blob/main/.github/workflows/build.yml#L53).
 	```
-	sed -i 's/blackskad\/go-web-scaffold/$ACCOUNT\/$PROJECTNAME/g' .
+	sed -i 's/tmeire\/go-web-scaffold/$ACCOUNT\/$PROJECTNAME/g' .
 	```
 
 1. Initialize the git repo and push them to your own GitHub repo.

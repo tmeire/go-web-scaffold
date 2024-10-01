@@ -8,8 +8,8 @@ import (
 	"os"
 	"sync"
 
-	"github.com/blackskad/go-web-scaffold/pkg/environment"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/tmeire/go-web-scaffold/pkg/environment"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/contrib/instrumentation/runtime"
 	"go.opentelemetry.io/otel"

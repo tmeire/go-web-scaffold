@@ -7,9 +7,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/blackskad/go-web-scaffold/pkg/environment"
-	"github.com/blackskad/go-web-scaffold/pkg/o11y"
-	"github.com/blackskad/go-web-scaffold/pkg/web"
+	"github.com/tmeire/go-web-scaffold/pkg/environment"
+	"github.com/tmeire/go-web-scaffold/pkg/o11y"
+	"github.com/tmeire/go-web-scaffold/pkg/web"
 )
 
 func main() {
