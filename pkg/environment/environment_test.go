@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/blackskad/go-web-scaffold/pkg/environment"
 	"github.com/stretchr/testify/assert"
+	"github.com/tmeire/go-web-scaffold/pkg/environment"
 )
 
 func TestConfig(t *testing.T) {

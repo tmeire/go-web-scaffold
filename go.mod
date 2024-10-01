@@ -1,4 +1,4 @@
-module github.com/blackskad/go-web-scaffold
+module github.com/tmeire/go-web-scaffold
 
 go 1.23.0
 

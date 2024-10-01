@@ -40,7 +40,7 @@ FROM base AS build
 
 RUN --mount=type=cache,target=/go/pkg/mod/ \
     --mount=type=cache,target=/root/.cache/go-build/ \
-    CGO_ENABLED=0 go build -ldflags="-X 'github.com/blackskad/go-web-scaffold/environment.Version=${VERSION}'" -o app .
+    CGO_ENABLED=0 go build -ldflags="-X 'github.com/tmeire/go-web-scaffold/environment.Version=${VERSION}'" -o app .
 
 # Stage with the production binary
 FROM gcr.io/distroless/static-debian12 AS production
