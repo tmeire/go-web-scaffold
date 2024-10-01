@@ -44,6 +44,8 @@ While the app can be build and run with plain Go commands, it's intended to be b
 
 * Production: this layer builds off of the distroless image. It sets up the binary and opens up the required ports in the image.
 
+If you want a more in-depth explanation of why the Dockerfile looks the way it does, I wrote a whole blog post about it: https://www.digitalpowertools.com/blog/go-build-it.html
+
 ### Docker compose
 
 To allow you to easily run the service locally without having to install a lot of local dependencies, a docker-compose.yaml file is included. This file includes everything to run a minimal stack.
